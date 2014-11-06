@@ -1,14 +1,16 @@
+// definizione variabili globali (utilizzate anche nelle librerie)
+int N; // numero di oggetti da processare
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "libHashFunction.h"
 #define MAX_LEN 100
 
-int N; // numero di oggetti da processare
 struct oggetto {struct oggetto *prev; char nome[MAX_LEN + 1]; int valore; struct oggetto *next;};
 
 void inserisci(struct oggetto**, struct oggetto*);
 void eliminaRiga(struct oggetto*);
-int hash(char*);
 int cfrAlfa(const void*, const void*);
 
 int main() {
@@ -130,15 +132,6 @@ void eliminaRiga(struct oggetto* primoItem) {
 
 }
 
-int hash(char nomeOggetto[]) {
-  int cur = 0;
-  int accumulatore = 0;
-  while(nomeOggetto[cur] != '\0') {
-    accumulatore += nomeOggetto[cur];
-    cur++;
-  }
-  return accumulatore % 2*N;
-}
 /*
 int cfrAlfa(const void* el1, const void* el2) {
   char* p1 = (struct oggetto**) el1;
